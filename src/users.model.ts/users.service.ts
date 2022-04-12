@@ -31,12 +31,8 @@ export class UserService {
 
     constructor() { }
 
-    public getUsers(): Promise<User[]> { // Promise => ca un fel de promisiune
-        return new Promise(
-            (resolve, reject) => {
-                setTimeout(() => { resolve(this.users) }, 2000)
-            }
-        )
+    public getUsers(): User[] {
+        return this.users
     }
 
     createUser(user : User) :number {
@@ -46,10 +42,11 @@ export class UserService {
         return user.id
     }
 
-    removeUser(id: number){
+    removeUser(id: number): User{
         const foundUser: User | undefined = this.users.find((user) => user.id === id);
         const index = this.users.indexOf(foundUser);
         this.users.splice(index, 1);
+		return foundUser;
     }
 
     editUser(id: number, user: User) {

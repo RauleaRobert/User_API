@@ -8,7 +8,7 @@ export class UserController {
     constructor(private readonly userService: UserService) {}
     
     @Get()
-    getUsers() : Promise<User[]> {
+    getUsers() : User[] {
         return this.userService.getUsers();
     }
     
@@ -27,9 +27,8 @@ export class UserController {
     }
 
     @Delete(':id')
-    remove(@Param('id') id: number): string {
-        this.userService.removeUser(id);
-        return "DELETED SUCCESFULLY"
+    remove(@Param('id') id: number): User {
+        return this.userService.removeUser(Number(id));
     }
 
     @Put(':id')
