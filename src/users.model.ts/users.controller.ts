@@ -32,8 +32,7 @@ export class UserController {
     }
 
     @Put(':id')
-    update(@Param('id') id: number, @Body() user: User): any{
-        this.userService.editUser(id, user);
-        return "SUCCES";
+    update(@Param('id') id: number, @Body() user: User): User{
+        return this.userService.editUser(id, user);
     }
 }

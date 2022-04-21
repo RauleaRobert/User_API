@@ -49,11 +49,13 @@ export class UserService {
 		return foundUser;
     }
 
-    editUser(id: number, user: User) {
-        const newUser: User = this.users.find((user) => user.id == id);
-        newUser.lastName = user.lastName;
-        newUser.firstName = user.firstName;
-        newUser.email = user.email;
-        newUser.userName = user.userName;
+    editUser(id: number, user: User): User {
+        let editedUser: User = this.users.find((user) => user.id == id);
+        editedUser.lastName = user.lastName;
+        editedUser.firstName = user.firstName;
+        editedUser.email = user.email;
+        editedUser.userName = user.userName;
+
+		return editedUser;
     }
 }
