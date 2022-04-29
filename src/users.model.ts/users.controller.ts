@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from "@nestjs/common";
 import { User } from "./users.model";
 
 import { UserService } from "./users.service";
@@ -8,13 +8,17 @@ export class UserController {
     constructor(private readonly userService: UserService) {}
     
     @Get()
-    getUsers() : User[] {
-        return this.userService.getUsers();
+    getUsers(@Query('rowPerPage') rows, @Query('page') page) : User[] {
+		console.log(rows);
+		console.log(page);
+        return this.userService.getUsers(rows,page);
     }
     
-    @Get(':id') // al doilea path -> dupa al 2-lea slash -> ex: http://localhost:300/user/salut -> log - "Ceau"
-    hello() {
-        return 'Ceau'
+    @Get('userNumber') // al doilea path -> dupa al 2-lea slash -> ex: http://localhost:300/user/salut -> log - "Ceau"
+    getNrOfUsers() {
+		console.log(this.userService.getNrOfUsers());
+		
+        return this.userService.getNrOfUsers();
     }
     
     @Post('create')
